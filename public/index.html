@@ -133,6 +133,13 @@
           <script>
                   const container = document.getElementById("container")
                   const socket = io()
+
+                  // recieving data from server's socket
+                  socket.on('server:checkbox:change', (data)=> {
+                    const {index, checked} = data
+                    const checkbox = document.getElementById(`checkbox-${index}`)
+                    checkbox.checked = checked
+                  })
                     
                   // fetching checkboxes from server
                   window.addEventListener("load", async () => {
@@ -151,7 +158,12 @@
                            })
                   })
                  
-                  
+                  container.addEventListener("change", (event) => {
+                    const checked = event.target.checked
+                    const index = Number(event.target.id.split("-")[1]);
+
+                    socket.emit("client:checkbox:change" ,{index,checked})
+                  })
 
           
           </script>

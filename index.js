@@ -21,6 +21,12 @@ async function main (){
 
           io.on("connection", (socket) => {
                     console.log(`socketId: ${socket.id} connected`)
+                    socket.on("client:checkbox:change", (data) => {
+                              const {index, checked} = data
+                              state.checkboxes[index] = checked
+
+                              io.emit('server:checkbox:change', data)
+                    })
           })
 
 
