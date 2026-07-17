@@ -1,6 +1,12 @@
 import http from "node:http"
 import express from "express"
 import path from "path"
+
+
+ const CHECKBOX_SIZE = process.env.CHECKBOX_SIZE || 100
+const state = {
+          checkboxes : new Array(CHECKBOX_SIZE).fill(false)
+}
  
 async function main (){
           
@@ -11,6 +17,11 @@ async function main (){
 
           // express
           app.use(express.static(path.resolve("./public")))
+
+          app.get('/checkboxes' , (req, res) => {
+                    return res.json({checkboxes : state.checkboxes})
+          })
+          
 
           app.get("/health", (req, res) => {
                     res.send("HELLO! helathy")
