@@ -4,7 +4,7 @@ import path from "path"
 import { Server } from "socket.io"
 
 
- const CHECKBOX_SIZE = process.env.CHECKBOX_SIZE || 100
+ const CHECKBOX_SIZE = process.env.CHECKBOX_SIZE || 10000
 const state = {
           checkboxes : new Array(CHECKBOX_SIZE).fill(false)
 }
